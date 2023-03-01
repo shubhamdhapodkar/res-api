@@ -1,0 +1,175 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10">
+      <h1 class="text-warning">Reactive Form Using Ngx Model</h1>
+    </div>
+    <div class="col-lg-2 pad-top">
+      <button class="btn btn-primary" (click)="openAddModal(add)">
+        Add New
+      </button>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <table class="table table-bordered m-3">
+    <thead>
+      <tr>
+        <th scope="col">Menu Name:</th>
+        <th scope="col">Menu Price:</th>
+        <th scope="col">Menu Quantity:</th>
+        <th scope="col">Menu Type:</th>
+        <th scope="col">Menu Category:</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let menu of menuList; let i = index">
+        <td>{{ menu.menuName }}</td>
+        <td>{{ menu.menuPrice }}</td>
+        <td>{{ menu.menuQuantity }}</td>
+        <td>{{ menu.menuType }}</td>
+        <td>{{ menu.menuCategory }}</td>
+        <td>
+          <button
+            class="btn btn-primary"
+            (click)="openEditModel(edit, menu, i,menu._id)"
+          >
+            Edit
+          </button>
+          <button class="btn btn-danger" (click)="delete(i,menu._id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #add>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Add Menu</h4>
+    <button
+      type="button"
+      class="btn-close close pull-right"
+      aria-label="Close"
+      (click)="modalRef?.hide()"
+    >
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="menuForm">
+      <div class="mb-3">
+        <label class="form-label">Menu Name:</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="ex. dosa"
+          formControlName="menuName"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Menu Price:</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="ex. rs"
+          formControlName="menuPrice"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Menu Quantity:</label>
+        <select class="form-select" formControlName="menuQuantity">
+          <option selected value="">Select Type:</option>
+          <option value="Half">Half</option>
+          <option value="Full">Full</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Menu Type:</label>
+        <select class="form-select" formControlName="menuType">
+          <option selected value="">Select Type:</option>
+          <option value="Veg">Veg</option>
+          <option value="Non-veg">Non-Veg</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Menu Category:</label>
+        <select class="form-select" formControlName="menuCategory">
+          <option selected value="">Select Category:</option>
+          <option value="SouthIndian">SouthIndian</option>
+          <option value="Chiness">Chiness</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <button class="btn btn-success" (click)="submit()">submit</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #edit>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Edit Menu</h4>
+    <button
+      type="button"
+      class="btn-close close pull-right"
+      aria-label="Close"
+      (click)="modalRef?.hide()"
+    >
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="menuForm">
+      <div class="mb-3">
+        <label class="form-label">Menu Name:</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="ex. dosa"
+          formControlName="menuName"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Menu Price:</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="ex. rs"
+          formControlName="menuPrice"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Menu Quantity:</label>
+        <select class="form-select" formControlName="menuQuantity">
+          <option selected value="">Select Type:</option>
+          <option value="Half">Half</option>
+          <option value="Full">Full</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Menu Type:</label>
+        <select class="form-select" formControlName="menuType">
+          <option selected value="">Select Type:</option>
+          <option value="Veg">Veg</option>
+          <option value="Non-veg">Non-Veg</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Menu Category:</label>
+        <select class="form-select" formControlName="menuCategory">
+          <option selected value="">Select Category:</option>
+          <option value="SouthIndian">SouthIndian</option>
+          <option value="Chiness">Chiness</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <button class="btn btn-success" (click)="update()">update</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
